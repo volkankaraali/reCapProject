@@ -12,3 +12,5 @@ C:\Users\karaali\Desktop\c# ders\ReCapProject\Business\obj\Debug\netstandard2.0\
 C:\Users\karaali\Desktop\c# ders\ReCapProject\Business\obj\Debug\netstandard2.0\Business.csproj.CopyComplete
 C:\Users\karaali\Desktop\c# ders\ReCapProject\Business\obj\Debug\netstandard2.0\Business.dll
 C:\Users\karaali\Desktop\c# ders\ReCapProject\Business\obj\Debug\netstandard2.0\Business.pdb
+C:\Users\karaali\Desktop\c# ders\ReCapProject\Business\bin\Debug\netstandard2.0\Core.dll
+C:\Users\karaali\Desktop\c# ders\ReCapProject\Business\bin\Debug\netstandard2.0\Core.pdb
