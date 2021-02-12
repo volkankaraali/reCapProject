@@ -14,105 +14,130 @@ namespace ConsoleUI
 
             CarManager carManager = new CarManager(new EfCarDal());
 
-            CarTest(carManager);
-            
+            //CarTest(carManager);
+
             Console.WriteLine("***EF Database'de olan arabalar CarDetailsDto'ya göre gösterildi***");
-            foreach (var car in carManager.GetCarDetails())
+            //CarGetAll(carManager);
+            Console.WriteLine(carManager.GetAll().Message);
+
+            Console.WriteLine("\n***BrandId'a göre ve ColorId'ye göre getirme****");
+            Console.WriteLine("*color'a göre");
+            //CarGetByColorId(carManager);
+            Console.WriteLine(carManager.GetCarsByColorId(1).Message);
+            Console.WriteLine("*brand'a göre");
+            //CarGetByBrandId(carManager);
+            Console.WriteLine(carManager.GetCarsByBrandId(1).Message);
+
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+
+            //BrandAddTest(brandManager);
+
+            Console.WriteLine("\n***Marka Listesi***");
+            //GetBrands(brandManager);
+            Console.WriteLine(brandManager.GetAll().Message);
+
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+
+            //ColorAddTest(colorManager);
+
+            Console.WriteLine("\n***Renk Listesi***");
+            //GetColors(colorManager);
+            Console.WriteLine(colorManager.GetAll().Message);
+
+        }
+
+        private static void GetColors(ColorManager colorManager)
+        {
+            foreach (var color in colorManager.GetAll().Data)
+            {
+                Console.WriteLine(color.ColorName);
+            }
+        }
+
+        private static void GetBrands(BrandManager brandManager)
+        {
+            foreach (var brand in brandManager.GetAll().Data)
+            {
+                Console.WriteLine(brand.BrandName);
+            }
+        }
+
+        private static void CarGetAll(CarManager carManager)
+        {
+            foreach (var car in carManager.GetCarDetails().Data)
             {
 
                 Console.WriteLine("id={0} - {1} marka, {2} renk, aciklama: {3}", car.CarId, car.BrandName, car.ColorName, car.Description);
             }
+        }
 
-            Console.WriteLine("\n***BrandId'a göre ve ColorId'ye göre getirme****");
-            Console.WriteLine("*color'a göre");
-            foreach (var car in carManager.GetCarsByColorId(1))
-            {
-                Console.WriteLine("Color {0} olan araba verisinin fiyati: {1} ve aciklama: {2}", car.ColorId, car.DailyPrice, car.Description);
-            }
-            Console.WriteLine("*brand'a göre");
-            foreach (var car in carManager.GetCarsByBrandId(1))
+        private static void CarGetByBrandId(CarManager carManager)
+        {
+            foreach (var car in carManager.GetCarsByBrandId(1).Data)
             {
                 Console.WriteLine("Brand {0} olan araba verisinin fiyati: {1} ve aciklama: {2}", car.BrandId, car.DailyPrice, car.Description);
             }
-
-
-
-
-
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-
-            BrandAddTest(brandManager);
-
-            Console.WriteLine("\n***Marka Listesi***");
-            foreach (var brand in brandManager.GetAll())
-            {
-                Console.WriteLine(brand.BrandName);
-            }
-
-            ColorManager colorManager = new ColorManager(new EfColorDal());
-
-            ColorAddTest(colorManager);
-
-            Console.WriteLine("\n***Renk Listesi***");
-            foreach (var color in colorManager.GetAll())
-            {
-                Console.WriteLine(color.ColorName);
-            }
-
-            
-
         }
-        /*
-        private static CarManager InMemoryTest()
+
+        private static void CarGetByColorId(CarManager carManager)
         {
-            CarManager carManager = new CarManager(new InMemoryCarDal());
-            Console.WriteLine("*****Tüm veriler********");
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetCarsByColorId(1).Data)
             {
-                Console.WriteLine("id:{0} --- aciklama:{1}", car.CarId, car.Description);
+                Console.WriteLine("Color {0} olan araba verisinin fiyati: {1} ve aciklama: {2}", car.ColorId, car.DailyPrice, car.Description);
             }
-
-            Car car1 = new Car() { CarId = 9, BrandId = 2, ColorId = 3, DailyPrice = 1234567, ModelYear = 2009, Description = "none" };
-            carManager.Add(car1);
-
-            Console.WriteLine("\n***** Add metodu ile eklenen veri GetById ile çekildi*******");
-            //foreach (var i in carManager.GetById(9))
-            //{
-            //    Console.WriteLine("id:{0}\nmarkaId:{1}\nrenkId:{2}\nfiyati:{3}\nmodeli:{4}\naciklamasi:{5}", i.Id, i.BrandId, i.ColorId, i.DailyPrice, i.ModelYear, i.Description);
-            //}
-
-            Console.WriteLine("\n***** Update metodu ile güncellenen veri******");
-            Console.WriteLine("önceki veri;");
-            //foreach (var i in carManager.GetById(9))
-            //{
-            //    Console.WriteLine("id:{0}\nmarkaId:{1}\nrenkId:{2}\nfiyati:{3}\nmodeli:{4}\naciklamasi:{5}", i.Id, i.BrandId, i.ColorId, i.DailyPrice, i.ModelYear, i.Description);
-            //}
-
-            Car carReNew = new Car();
-            carReNew.CarId = 9;
-            carReNew.BrandId = 2;
-            carReNew.ColorId = 3;
-            carReNew.DailyPrice = 1234567;
-            carReNew.ModelYear = 2009;
-            carReNew.Description = "Fiat-Doblo";
-
-            carManager.Update(carReNew);
-            Console.WriteLine("\ngüncellenmiş veri;");
-            //foreach (var i in carManager.GetById(9))
-            //{
-            //    Console.WriteLine("id:{0}\nmarkaId:{1}\nrenkId:{2}\nfiyati:{3}\nmodeli:{4}\naciklamasi:{5}", i.Id, i.BrandId, i.ColorId, i.DailyPrice, i.ModelYear, i.Description);
-            //}
-
-            Console.WriteLine("\n******Delete metodu ile silinen id=1 olan veri silindi sonraki veriler*******");
-            carManager.Delete(new Car() { CarId = 1 });
-            foreach (var car in carManager.GetAll())
-            {
-                Console.WriteLine("id:{0} --- aciklama:{1}", car.CarId, car.Description);
-            }
-
-            return carManager;
         }
-        */
+
+        /*
+private static CarManager InMemoryTest()
+{
+   CarManager carManager = new CarManager(new InMemoryCarDal());
+   Console.WriteLine("*****Tüm veriler********");
+   foreach (var car in carManager.GetAll())
+   {
+       Console.WriteLine("id:{0} --- aciklama:{1}", car.CarId, car.Description);
+   }
+
+   Car car1 = new Car() { CarId = 9, BrandId = 2, ColorId = 3, DailyPrice = 1234567, ModelYear = 2009, Description = "none" };
+   carManager.Add(car1);
+
+   Console.WriteLine("\n***** Add metodu ile eklenen veri GetById ile çekildi*******");
+   //foreach (var i in carManager.GetById(9))
+   //{
+   //    Console.WriteLine("id:{0}\nmarkaId:{1}\nrenkId:{2}\nfiyati:{3}\nmodeli:{4}\naciklamasi:{5}", i.Id, i.BrandId, i.ColorId, i.DailyPrice, i.ModelYear, i.Description);
+   //}
+
+   Console.WriteLine("\n***** Update metodu ile güncellenen veri******");
+   Console.WriteLine("önceki veri;");
+   //foreach (var i in carManager.GetById(9))
+   //{
+   //    Console.WriteLine("id:{0}\nmarkaId:{1}\nrenkId:{2}\nfiyati:{3}\nmodeli:{4}\naciklamasi:{5}", i.Id, i.BrandId, i.ColorId, i.DailyPrice, i.ModelYear, i.Description);
+   //}
+
+   Car carReNew = new Car();
+   carReNew.CarId = 9;
+   carReNew.BrandId = 2;
+   carReNew.ColorId = 3;
+   carReNew.DailyPrice = 1234567;
+   carReNew.ModelYear = 2009;
+   carReNew.Description = "Fiat-Doblo";
+
+   carManager.Update(carReNew);
+   Console.WriteLine("\ngüncellenmiş veri;");
+   //foreach (var i in carManager.GetById(9))
+   //{
+   //    Console.WriteLine("id:{0}\nmarkaId:{1}\nrenkId:{2}\nfiyati:{3}\nmodeli:{4}\naciklamasi:{5}", i.Id, i.BrandId, i.ColorId, i.DailyPrice, i.ModelYear, i.Description);
+   //}
+
+   Console.WriteLine("\n******Delete metodu ile silinen id=1 olan veri silindi sonraki veriler*******");
+   carManager.Delete(new Car() { CarId = 1 });
+   foreach (var car in carManager.GetAll())
+   {
+       Console.WriteLine("id:{0} --- aciklama:{1}", car.CarId, car.Description);
+   }
+
+   return carManager;
+}
+*/
 
         //EntityFramework Crud test
         private static void ColorAddTest(ColorManager colorManager)
