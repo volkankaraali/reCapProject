@@ -14,3 +14,6 @@ mssql ile datebase oluşturulup EntityFramework ile altyapısı yazıldı.
 
 projeye Core katmanı dahil edildi.
 dto(data transformation object) ile CarDetailsDto oluşturularak Color ve Brand tablolarındaki Name'lere ulaşılarak yeni bir gösterim ekranı yazıldı.
+
+#Odev 10/1
+projeye Core/Utilities/Result eklendi. ve Bussiness katmanında refaktör yapıldı.
