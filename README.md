@@ -17,4 +17,4 @@ dto(data transformation object) ile CarDetailsDto oluşturularak Color ve Brand 
 
 #Odev 10/1
 
-projeye Core/Utilities/Result eklendi. ve Business katmanında refaktör yapıldı.
+projeye Core/Utilities/Results eklendi. ve Business katmanında refaktör yapıldı.
