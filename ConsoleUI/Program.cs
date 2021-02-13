@@ -3,6 +3,7 @@ using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
+using System.Data.SqlTypes;
 
 namespace ConsoleUI
 {
@@ -44,6 +45,53 @@ namespace ConsoleUI
             //GetColors(colorManager);
             Console.WriteLine(colorManager.GetAll().Message);
 
+            Console.WriteLine("\n***Kullanıcılar Oluşturuldu***");
+
+            UserManager userManager = new UserManager(new EfUserDal());
+            //UsersTest(userManager);
+            Console.WriteLine(userManager.GetAll().Message);
+
+            Console.WriteLine("\n***Müşteriler Oluşturuldu***");
+
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            //CustomersTest(customerManager);
+            Console.WriteLine(customerManager.GetAll().Message);
+
+            Console.WriteLine("\n***Kiralama Oluşturuldu***");
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            //RentalsTest(rentalManager);
+
+            foreach (var rental in rentalManager.GetRentDetails().Data)
+            {
+                Console.WriteLine("rentalid:" + rental.RentalId + " - car description:" + rental.CarDescription + " - company name:" + rental.CampanyName + " - rentdate:" + rental.RentDate + " - returndate:" + rental.ReturnDate);
+            }
+
+
+        }
+
+        private static void RentalsTest(RentalManager rentalManager)
+        {
+            Rental rental1 = new Rental() { Id = 1, CarId = 2, CustomerId = 1, RentDate = DateTime.Now };
+            Rental rental2 = new Rental() { Id = 1, CarId = 2, CustomerId = 1, RentDate = DateTime.Now };
+            Rental rental3 = new Rental() { Id = 2, CarId = 3, CustomerId = 1, RentDate = DateTime.Now };
+            Rental rental4 = new Rental() { Id = 3, CarId = 3, CustomerId = 1, RentDate = DateTime.Now, ReturnDate = DateTime.Today };
+            Rental rental5 = new Rental() { Id = 4, CarId = 6, CustomerId = 2, RentDate = DateTime.Now };
+            rentalManager.Add(rental5);
+        }
+
+        private static void CustomersTest(CustomerManager customerManager)
+        {
+            Customer customer1 = new Customer() { Id = 1, UserId = 1, CompanyName = "volkan şirketi" };
+            Customer customer2 = new Customer() { Id = 2, UserId = 2, CompanyName = "ali şirketi" };
+            customerManager.Add(customer2);
+        }
+
+        private static void UsersTest(UserManager userManager)
+        {
+            User user1 = new User() { Id = 1, Name = "volkan", LastName = "karaali", Email = "mail@mail.com", Password = "v123" };
+            User user2 = new User() { Id = 2, Name = "ali", LastName = "veli", Email = "mail1@mail.com", Password = "1234" };
+            userManager.Add(user2);
         }
 
         private static void GetColors(ColorManager colorManager)
