@@ -18,3 +18,7 @@ dto(data transformation object) ile CarDetailsDto oluşturularak Color ve Brand 
 #Odev 10/1
 
 projeye Core/Utilities/Results eklendi ve Business katmanında refaktör yapıldı.
+
+#Odev 10/4
+
+projeye Users, Customers ve Rentals tablosu eklendi. bu tablolar için CRUD operasyonları eklendi. kiralama (Rental/Add) işlemi yapabilmesi için koşul olarak,oluşturulan rental nesnesinin customer idsi eğer rentals tablosunda customer id eşleşiyorsa (yani daha önce o müşteri kiralama yapmış) kiralama yapamaması koyuldu. ödeve ek olarak RentalDetailsDto eklendi.
