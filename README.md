@@ -26,3 +26,10 @@ projeye Users, Customers ve Rentals tablosu eklendi. bu tablolar için CRUD oper
 #Odev 11/1
 
 projeye WebAPI eklendi. Business'deki tüm servisler için api yazıldı.
+
+#Odev 12/1-2-3
+
+projeye autofac, fluentvalidation ve aop desteği eklendi.
+
+autofac ile, webapi içerisinde yazmış olduğumuz ioc containerleri business katmanına çekildi.
+fluentvalidation kullanılarak validation alt yapısı yazıldı.
